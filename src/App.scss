@@ -1,0 +1,9 @@
+$colors: red, orange, yellow, green, blue, purple, pink, cyan, indigo, lime;
+
+@for $i from 1 to length($colors) {
+  .rbc-row:nth-child(#{$i}) {
+    .rbc-event {
+      background-color: nth($colors, $i);
+    }
+  }
+}
