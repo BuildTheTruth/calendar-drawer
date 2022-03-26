@@ -12,7 +12,7 @@ function App() {
     const defaultDate = params.get("defaultDate");
     const events = params.get("events");
     return {
-      defaultDate: new Date(defaultDate),
+      defaultDate: defaultDate ? new Date(defaultDate) : new Date(),
       events:
         JSON.parse(events)?.map(({ start, end }) => ({
           start: new Date(start),
