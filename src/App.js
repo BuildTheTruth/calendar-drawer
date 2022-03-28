@@ -26,6 +26,7 @@ function App() {
       height,
     };
   }, []);
+
   return (
     <div className="app">
       <Calendar
