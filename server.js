@@ -11,12 +11,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 app.post("/", async (req, res) => {
-  const { defaultDate, events } = req.body;
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(
-    `${BASE_URL}?defaultDate=${defaultDate}&events=${JSON.stringify(events)}`
-  );
+  const queryParams = new URLSearchParams();
+
+  Object.keys(req.body).forEach((key) => {
+    const param = req.body[key];
+    queryParams.append(
+      key,
+      typeof param === "object" ? JSON.stringify(param) : param
+    );
+  });
+
+  console.log(queryParams);
+
+  await page.goto(`${BASE_URL}?${queryParams.toString()}`);
   const calendar = await page.$(".rbc-calendar");
   await calendar.screenshot({ path });
   res.json({ path });

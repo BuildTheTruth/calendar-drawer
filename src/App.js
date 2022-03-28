@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useMemo } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./App.scss";
 
@@ -11,6 +12,9 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const defaultDate = params.get("defaultDate");
     const events = params.get("events");
+    const width = params.get("width");
+    const height = params.get("height");
+
     return {
       defaultDate: defaultDate ? new Date(defaultDate) : new Date(),
       events:
@@ -18,6 +22,8 @@ function App() {
           start: new Date(start),
           end: new Date(end),
         })) ?? [],
+      width,
+      height,
     };
   }, []);
   return (
@@ -26,7 +32,7 @@ function App() {
         defaultDate={data.defaultDate}
         localizer={localizer}
         events={data.events}
-        style={{ height: 500, width: 800 }}
+        style={{ height: data.height ?? "500px", width: data.width ?? "800px" }}
         showAllEvents
       />
     </div>
