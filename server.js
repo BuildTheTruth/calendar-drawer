@@ -4,13 +4,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 8080;
 const BASE_URL = "https://calendar-drawer.vercel.app";
-const path = `./images/calendar-${Date.now()}.png`;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 app.post("/", async (req, res) => {
+  const path = `./images/calendar-${Date.now()}.png`;
   const crawler = await HCCrawler.launch({
     onSuccess: (result) => {
       console.log(result.options.url);
