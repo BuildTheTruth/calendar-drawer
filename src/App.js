@@ -60,7 +60,7 @@ function App() {
   }, [data]);
 
   return (
-    <div className="app">
+    <div className="app" style={{ width: data.width }}>
       <Calendar
         defaultDate={data.defaultDate}
         localizer={localizer}
