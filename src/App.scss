@@ -1,15 +1,6 @@
-$colors: red, orange, yellow, green, blue, purple, pink, cyan, indigo, lime;
-
-@for $i from 1 to length($colors) {
-  .rbc-row:nth-child(#{$i}) {
-    .rbc-event {
-      background-color: nth($colors, $i);
-    }
-  }
-}
-
 .rbc-calendar {
   background-color: #fdf8f2;
+  padding: 0 16px;
 }
 
 .rbc-toolbar {
@@ -29,5 +20,82 @@ $colors: red, orange, yellow, green, blue, purple, pink, cyan, indigo, lime;
 
   button {
     border: 0;
+  }
+}
+
+.rbc-header + .rbc-header {
+  border: 0;
+}
+
+.rbc-month-header {
+  .rbc-header {
+    border-bottom: 1px solid #b6b5b3;
+    font-weight: normal;
+    color: #272726;
+    padding-bottom: 4px;
+  }
+}
+
+.rbc-month-view {
+  border: 0;
+  .rbc-month-row {
+    border: 0;
+    .rbc-row-bg {
+      .rbc-today {
+        background-color: #fdf8f2;
+      }
+      .rbc-day-bg {
+        border: 0;
+      }
+      .rbc-off-range-bg {
+        color: #dcdbd7;
+        background: none;
+      }
+    }
+  }
+}
+
+.event-label-group {
+  display: flex;
+  height: 50px;
+  background-color: #fdf8f2;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px 0;
+
+  .event-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .event-present {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+}
+
+.rbc-date-cell {
+  display: flex;
+  justify-content: center;
+  padding-left: 5px;
+  z-index: 2;
+}
+
+.rbc-row-content {
+  display: flex;
+  justify-content: center;
+}
+
+.rbc-row-content-scroll-container {
+  position: absolute;
+  top: 11px;
+
+  .rbc-row {
+    position: absolute;
   }
 }
