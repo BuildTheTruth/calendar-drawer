@@ -1,10 +1,12 @@
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./App.scss";
 import moment from "moment";
 import { useMemo } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import "moment/locale/ko";
+import Toolbar from "./Toolbar";
 
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "./App.scss";
-
+moment.locale("ko-KR");
 const localizer = momentLocalizer(moment);
 
 function App() {
@@ -33,8 +35,9 @@ function App() {
         defaultDate={data.defaultDate}
         localizer={localizer}
         events={data.events}
-        style={{ height: data.height ?? "500px", width: data.width ?? "800px" }}
+        style={{ height: data.height ?? "300px", width: data.width ?? "500px" }}
         showAllEvents
+        components={{ toolbar: Toolbar }}
       />
     </div>
   );
