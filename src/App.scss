@@ -96,7 +96,8 @@
 
 .rbc-row-content-scroll-container {
   position: absolute;
-  top: 10px;
+  display: flex;
+  align-items: center;
 
   .rbc-row {
     position: absolute;
