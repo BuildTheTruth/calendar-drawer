@@ -1,8 +1,8 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const HCCrawler = require("headless-chrome-crawler");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const BASE_URL = "https://calendar-drawer.vercel.app";
 const path = `./images/calendar-${Date.now()}.png`;
 
@@ -11,8 +11,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 app.post("/", async (req, res) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const crawler = await HCCrawler.launch({
+    onSuccess: (result) => {
+      console.log(result.options.url);
+    },
+  });
   const queryParams = new URLSearchParams();
 
   Object.keys(req.body).forEach((key) => {
@@ -23,11 +26,19 @@ app.post("/", async (req, res) => {
     );
   });
 
-  console.log(queryParams);
+  await crawler.queue({
+    url: `${BASE_URL}?${queryParams.toString()}`,
+    screenshot: {
+      path,
+    },
+    viewport: {
+      width: Number(queryParams.get("width").slice(0, -2)),
+      height: Number(queryParams.get("height").slice(0, -2)) + 82,
+    },
+  });
 
-  await page.goto(`${BASE_URL}?${queryParams.toString()}`);
-  const calendar = await page.$(".rbc-calendar");
-  await calendar.screenshot({ path });
+  await crawler.onIdle();
+  await crawler.close();
   res.json({ path });
 });
 
