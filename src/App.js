@@ -76,8 +76,8 @@ function App() {
           return {
             style: {
               backgroundColor: event.bgColor,
-              padding: "10px",
-              borderRadius: "10px",
+              padding: "12px",
+              borderRadius: "12px",
             },
           };
         }}
