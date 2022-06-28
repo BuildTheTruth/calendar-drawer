@@ -1,6 +1,6 @@
 // import ArrowLeftIcon from './ArrowLeftIcon'
 import { ReactComponent as ChevronLeft } from './svg/chevron-left-solid.svg'
-import { ReactComponent as CHevronRight } from './svg/chevron-right-solid.svg'
+import { ReactComponent as ChevronRight } from './svg/chevron-right-solid.svg'
 
 export default function Toolbar({ date, onNavigate }) {
   const month = ('0' + (date.getMonth() + 1)).slice(-2)
@@ -17,7 +17,7 @@ export default function Toolbar({ date, onNavigate }) {
         <span className="rbc-toolbar-label">{label}</span>
         <button type="button" onClick={() => onNavigate('NEXT')}>
           <span className="svg-wrapper">
-            <CHevronRight width="16" height="16" />
+            <ChevronRight width="16" height="16" />
           </span>
         </button>
       </span>
